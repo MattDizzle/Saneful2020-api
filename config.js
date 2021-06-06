@@ -9,7 +9,7 @@ if (process.env.NODE_ENV == "production") {
     USER: process.env.PROD_USER,
     PASSWORD: process.env.PROD_PASSWORD,
   };
-} else {
+} else if(process.env.NODE_ENV == "test")  {
   module.exports = {
     PORT: process.env.LOCAL_PORT,
     NODE_ENV: process.env.NODE_ENV,
