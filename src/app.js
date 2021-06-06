@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const config = require('./config');
+const config = require('../config');
 const savedGameRouter = require('./saved-games/saved-game-router');
 const authRouter = require('./auth/auth-router');
 const userRouter = require('./user/user-router');
