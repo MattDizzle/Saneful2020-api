@@ -1,8 +1,8 @@
 {
-  "name": "mattr-boilerplate",
+  "name": "saneful2020-api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "mocha --require test/setup.js",
     "dev": "nodemon src/server.js",
@@ -15,15 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thinkful-ei-panda/mattr-boilerplate.git"
+    "url": "git+https://github.com/MattDizzle/Saneful2020-api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thinkful-ei-panda/mattr-boilerplate/issues"
+    "url": "https://github.com/MattDizzle/Saneful2020-api/issues"
   },
-  "homepage": "https://github.com/thinkful-ei-panda/mattr-boilerplate#readme",
+  "homepage": "https://github.com/MattDizzle/Saneful2020-api#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
