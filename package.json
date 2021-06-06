@@ -11,7 +11,6 @@
     "migrate:production": "heroku run npm run migrate",
     "start": "node src/server.js",
     "predeploy": "npm audit",
-    "postdeploy": "npm run migrate:production",
     "deploy": "git push heroku main"
   },
   "repository": {
