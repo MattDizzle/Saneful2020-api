@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server.js",
     "predeploy": "npm audit",
-    "deploy": "git push heroku master"
+    "deploy": "git push heroku main"
   },
   "repository": {
     "type": "git",
