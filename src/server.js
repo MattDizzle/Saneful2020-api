@@ -5,11 +5,11 @@ const knex = require("knex");
 
 const db = knex({
   client: "pg",
-  connection: config.DATABASE_URL,
+  connection: process.env.DATABASE_URL,
 });
 
 app.set("db", db);
 
-app.listen(config.PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Server listening at ${config.PORT}`);
 });
