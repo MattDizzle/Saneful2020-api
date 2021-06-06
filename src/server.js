@@ -1,5 +1,4 @@
 const app = require("./app");
-const config = require("../config");
 const knex = require("knex");
 
 
@@ -11,5 +10,5 @@ const db = knex({
 app.set("db", db);
 
 app.listen(process.env.PORT, () => {
-  console.log(`Server listening at ${config.PORT}`);
+  console.log(`Server listening at ${process.env.PORT}`);
 });
