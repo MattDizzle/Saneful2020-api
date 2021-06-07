@@ -7,10 +7,13 @@ const knex = require("knex");
 const db = knex({
   client: "pg",
   connection: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+  ssl: true,
+  extra: {
+      ssl: {
+        rejectUnauthorized: false,
+      }
+    }
+})
 
 app.set("db", db);
 
