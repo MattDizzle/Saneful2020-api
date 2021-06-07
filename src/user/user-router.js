@@ -1,41 +1,41 @@
-const express = require('express');
-const path = require('path');
-const UserService = require('./user-service');
+const express = require("express");
+const path = require("path");
+const UserService = require("./user-service");
 
 const userRouter = express.Router();
 const jsonBodyParser = express.json();
 
-userRouter.post('/', jsonBodyParser, (req, res, next) => {
-  const { user_name, user_email, user_password } = req.body;
+userRouter.post("/", jsonBodyParser, (req, res, next) => {
+  const { user_name, user_email, user_password } = await req.body;
 
-  for (const field of ['user_name', 'user_email', 'user_password'])
+  for (const field of ["user_name", "user_email", "user_password"])
     if (!req.body[field])
       return res.status(400).json({
         error: `Missing '${field}' in request body`,
       });
 
-  const passwordError = UserService.validatePassword(user_password);
+  const passwordError = await UserService.validatePassword(user_password);
 
   if (passwordError) return res.status(400).json({ error: passwordError });
 
-  UserService.hasUserWithEmail(req.app.get('db'), user_email)
+  UserService.hasUserWithEmail(req.app.get("db"), user_email)
     .then((hasUserWithEmail) => {
       if (hasUserWithEmail)
-        return res.status(400).json({ error: 'Email already registered' });
+        return res.status(400).json({ error: "Email already registered" });
 
       return UserService.hashPassword(user_password).then((hashedPassword) => {
         const newUser = {
           user_name,
           user_email,
           user_password: hashedPassword,
-          date_created: 'now()',
+          date_created: Date.now(),
         };
 
-        return UserService.insertUser(req.app.get('db'), newUser).then(
+        return UserService.insertUser(req.app.get("db"), newUser).then(
           (user) => {
             res
               .status(201)
-              .json({ message: 'User has been registered' })
+              .json({ message: "User has been registered" })
               .location(path.posix.join(req.originalUrl, `/${user.id}`))
               .json(UserService.serializeUser(user));
           }
