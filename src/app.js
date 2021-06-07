@@ -4,23 +4,20 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const config = require('../config');
 const savedGameRouter = require('./saved-games/saved-game-router');
 const authRouter = require('./auth/auth-router');
 const userRouter = require('./user/user-router');
 
 const app = express();
 
-const morganOption = config.NODE_ENV === 'production' ? 'tiny' : 'common';
-
-console.log("environment:" + config.DATABASE_URL)
+const morganOption = process.env.NODE_ENV === 'production' ? 'tiny' : 'common';
 
 app.use(morgan(morganOption));
 app.use(cors());
 app.use(helmet());
 
-app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/save', savedGameRouter);
 
 app.get('/', (req, res) => {
@@ -30,8 +27,8 @@ app.get('/', (req, res) => {
 
 app.use(function errorHandler(error, req, res, next) {
   let response;
-  if (config.NODE_ENV === 'production') {
-    response = { error: { message: 'server error' } };
+  if (process.env.NODE_ENV === 'production') {
+    response = { error: { message: 'production server error:  ' + error.message } };
   } else {
     console.error(error);
     response = { message: error.message, error };

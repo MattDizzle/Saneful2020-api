@@ -5,14 +5,14 @@ const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*
 
 const UserService = {
   
-  hasUserWithEmail(db, user_email) {
+   hasUserWithEmail(db, user_email) {
     return db('saneful_user')
       .where({ user_email })
       .first()
       .then(user => !!user);
   },
 
-  insertUser(db, newUser) {
+   insertUser(db, newUser) {
     return db
       .insert(newUser)
       .into('saneful_user')
@@ -20,7 +20,7 @@ const UserService = {
       .then(([user]) => user);
   },
 
-  validatePassword(password) {
+   validatePassword(password) {
     if (password.length < 8) {
       return 'Password be longer than 8 characters';
     }
@@ -36,11 +36,11 @@ const UserService = {
     return null;
   },
 
-  hashPassword(password) {
+   hashPassword(password) {
     return bcrypt.hash(password, 12);
   },
 
-  serializeUser(user) {
+   serializeUser(user) {
     return {
       user_name: user.user_name,
       id: user.id,
@@ -49,7 +49,7 @@ const UserService = {
     };
   },
 
-  getUserbyUserId(db, user_id){
+   getUserbyUserId(db, user_id){
     return db('saneful_user')
       .where('id', user_id);
   }

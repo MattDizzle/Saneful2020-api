@@ -1,15 +1,19 @@
+require('dotenv').config()
+
 const app = require("./app");
-const config = require("../config");
 const knex = require("knex");
 
 
 const db = knex({
   client: "pg",
-  connection: config.DATABASE_URL,
+  connection: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 app.set("db", db);
 
-app.listen(config.PORT, () => {
-  console.log(`Server listening at ${config.PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server listening at ${process.env.PORT}`);
 });
